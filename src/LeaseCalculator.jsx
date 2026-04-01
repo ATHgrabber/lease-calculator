@@ -70,6 +70,10 @@ export default function LeaseCalculator() {
 
   const r = calc();
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   const SliderRow = ({ label, value, setValue, min, max, step, format, sub }) => (
     <div style={{ marginBottom: 28 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 6 }}>
@@ -101,13 +105,49 @@ export default function LeaseCalculator() {
         input[type=range]::-webkit-slider-thumb { appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #3b82f6; border: 3px solid #060d1a; box-shadow: 0 0 0 2px #3b82f6; cursor: pointer; transition: transform 0.15s; }
         input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.25); }
         * { box-sizing: border-box; }
+        .pdf-btn { transition: all 0.2s; }
+        .pdf-btn:hover { background: rgba(59,130,246,0.25) !important; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(59,130,246,0.3); }
+        .pdf-btn:active { transform: translateY(0); }
+        @media print {
+          body { background: white !important; color: black !important; }
+          .no-print { display: none !important; }
+          * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
       `}</style>
 
       <div style={{ background: "linear-gradient(180deg, #0a1628 0%, #060d1a 100%)", borderBottom: "1px solid #1a2d4a", padding: "36px 24px 28px", marginBottom: 32 }}>
-        <div style={{ maxWidth: 720, margin: "0 auto" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           <div style={{ fontSize: 10, letterSpacing: "0.2em", color: "#3b82f6", textTransform: "uppercase", fontFamily: "'DM Mono', monospace", marginBottom: 10 }}>Advisory Japan — Vehicle Leasing</div>
           <h1 style={{ fontSize: 28, fontWeight: 800, color: "#e8f1fb", fontFamily: "'Syne', sans-serif", margin: 0, letterSpacing: "-0.02em" }}>リース料金 計算ツール</h1>
           <p style={{ fontSize: 13, color: "#4a6080", marginTop: 8, lineHeight: 1.6 }}>車検・修理：貸主負担　／　消耗品・保険：借主負担　／　売却益で利益回収</p>
+          </div>
+          <button
+            className="pdf-btn no-print"
+            onClick={handlePrint}
+            style={{
+              display: "flex", alignItems: "center", gap: 8,
+              padding: "12px 20px",
+              background: "rgba(59,130,246,0.12)",
+              border: "1px solid rgba(59,130,246,0.4)",
+              borderRadius: 10,
+              color: "#93c5fd",
+              fontSize: 13,
+              fontFamily: "'DM Mono', monospace",
+              cursor: "pointer",
+              letterSpacing: "0.05em",
+              whiteSpace: "nowrap",
+              marginTop: 4,
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+            PDF 出力
+          </button>
         </div>
       </div>
 
