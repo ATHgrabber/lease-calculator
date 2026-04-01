@@ -20,107 +20,130 @@ function QuoteView({ r, params, onBack }) {
   const [notes, setNotes] = useState("");
   const today = new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" });
   const mileage = MILEAGE_OPTIONS[params.mileageIdx];
-  const iS = { border:"1px solid #d1d5db", borderRadius:6, padding:"8px 12px", fontSize:14, width:"100%", outline:"none", fontFamily:"inherit", color:"#1f2937", background:"white" };
-  const lS = { fontSize:12, color:"#6b7280", marginBottom:4, display:"block", fontWeight:600 };
+  const iS = { border:"1px solid #d1d5db", borderRadius:6, padding:"7px 12px", fontSize:13, width:"100%", outline:"none", fontFamily:"inherit", color:"#1f2937", background:"white" };
+  const lS = { fontSize:11, color:"#6b7280", marginBottom:3, display:"block", fontWeight:600 };
   return (
     <div style={{ minHeight:"100vh", background:"#f3f4f6", fontFamily:"'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
-        @media print { .no-print{display:none!important} body{background:white!important} .qp{box-shadow:none!important;margin:0!important;border-radius:0!important} *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important} }
+        @media print {
+          .no-print{display:none!important}
+          body{background:white!important}
+          .qp{box-shadow:none!important;margin:0!important;border-radius:0!important}
+          *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+          @page{margin:10mm}
+        }
         input:focus,textarea:focus{border-color:#2563eb!important;box-shadow:0 0 0 2px rgba(37,99,235,.15)}
       `}</style>
-      <div className="no-print" style={{background:"#1e293b",padding:"12px 24px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-        <button onClick={onBack} style={{background:"none",border:"1px solid #475569",color:"#94a3b8",padding:"8px 16px",borderRadius:6,cursor:"pointer",fontSize:13}}>← 計算ツールに戻る</button>
+
+      <div className="no-print" style={{background:"#1e293b",padding:"10px 24px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+        <button onClick={onBack} style={{background:"none",border:"1px solid #475569",color:"#94a3b8",padding:"7px 14px",borderRadius:6,cursor:"pointer",fontSize:13}}>← 計算ツールに戻る</button>
         <div style={{display:"flex",gap:10,alignItems:"center"}}>
           <span style={{color:"#64748b",fontSize:13}}>入力後、PDF出力してください</span>
-          <button onClick={()=>window.print()} style={{background:"#2563eb",border:"none",color:"white",padding:"10px 24px",borderRadius:6,cursor:"pointer",fontSize:14,fontWeight:600}}>📄 PDF出力</button>
+          <button onClick={()=>window.print()} style={{background:"#2563eb",border:"none",color:"white",padding:"8px 20px",borderRadius:6,cursor:"pointer",fontSize:13,fontWeight:600}}>📄 PDF出力</button>
         </div>
       </div>
-      <div className="no-print" style={{maxWidth:800,margin:"20px auto",background:"white",borderRadius:10,padding:"20px 24px",boxShadow:"0 1px 4px rgba(0,0,0,.08)"}}>
-        <div style={{fontSize:14,fontWeight:700,color:"#374151",marginBottom:14}}>📝 見積書情報の入力</div>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:16,marginBottom:12}}>
+
+      <div className="no-print" style={{maxWidth:760,margin:"12px auto",background:"white",borderRadius:10,padding:"16px 20px",boxShadow:"0 1px 4px rgba(0,0,0,.08)"}}>
+        <div style={{fontSize:13,fontWeight:700,color:"#374151",marginBottom:12}}>📝 見積書情報の入力</div>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12,marginBottom:10}}>
           <div><label style={lS}>お客様名</label><input style={iS} value={clientName} onChange={e=>setClientName(e.target.value)} placeholder="例：山田 太郎 様" /></div>
           <div><label style={lS}>車両名・グレード</label><input style={iS} value={vehicleName} onChange={e=>setVehicleName(e.target.value)} placeholder="例：アルファード Z Grade" /></div>
           <div><label style={lS}>担当者名</label><input style={iS} value={staffName} onChange={e=>setStaffName(e.target.value)} placeholder="例：Advisory Japan 鈴木" /></div>
         </div>
-        <div><label style={lS}>備考・特記事項</label><textarea style={{...iS,height:52,resize:"vertical"}} value={notes} onChange={e=>setNotes(e.target.value)} placeholder="例：ご不明点はお気軽にお問い合わせください。" /></div>
+        <div><label style={lS}>備考・特記事項</label><textarea style={{...iS,height:44,resize:"vertical"}} value={notes} onChange={e=>setNotes(e.target.value)} placeholder="例：ご不明点はお気軽にお問い合わせください。" /></div>
       </div>
-      <div className="qp" style={{maxWidth:800,margin:"0 auto 40px",background:"white",borderRadius:10,boxShadow:"0 2px 12px rgba(0,0,0,.1)",overflow:"hidden"}}>
-        <div style={{background:"#1e293b",padding:"28px 36px",display:"flex",justifyContent:"space-between",alignItems:"flex-end"}}>
+
+      <div className="qp" style={{maxWidth:760,margin:"0 auto 20px",background:"white",borderRadius:10,boxShadow:"0 2px 12px rgba(0,0,0,.1)",overflow:"hidden"}}>
+
+        <div style={{background:"#1e293b",padding:"20px 32px",display:"flex",justifyContent:"space-between",alignItems:"flex-end"}}>
           <div>
-            <div style={{fontSize:11,color:"#94a3b8",letterSpacing:"0.15em",textTransform:"uppercase",marginBottom:6}}>Advisory Japan — Vehicle Leasing</div>
-            <div style={{fontSize:26,fontWeight:700,color:"white"}}>お見積書</div>
+            <div style={{fontSize:10,color:"#94a3b8",letterSpacing:"0.15em",textTransform:"uppercase",marginBottom:4}}>Advisory Japan — Vehicle Leasing</div>
+            <div style={{fontSize:24,fontWeight:700,color:"white"}}>お見積書</div>
           </div>
-          <div style={{textAlign:"right"}}><div style={{fontSize:12,color:"#94a3b8"}}>発行日</div><div style={{fontSize:14,color:"white",fontWeight:500}}>{today}</div></div>
+          <div style={{textAlign:"right"}}>
+            <div style={{fontSize:11,color:"#94a3b8"}}>発行日</div>
+            <div style={{fontSize:13,color:"white",fontWeight:500}}>{today}</div>
+          </div>
         </div>
-        <div style={{padding:"24px 36px",borderBottom:"1px solid #e5e7eb",display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
+
+        <div style={{padding:"16px 32px",borderBottom:"1px solid #e5e7eb",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
           <div>
-            <div style={{fontSize:12,color:"#9ca3af",marginBottom:4}}>お客様</div>
-            <div style={{fontSize:20,fontWeight:700,color:"#111827"}}>{clientName||"　　　　　　　　　　"}</div>
-            {vehicleName&&<div style={{fontSize:13,color:"#6b7280",marginTop:4}}>対象車両：{vehicleName}</div>}
+            <div style={{fontSize:11,color:"#9ca3af",marginBottom:2}}>お客様</div>
+            <div style={{fontSize:18,fontWeight:700,color:"#111827"}}>{clientName||"　　　　　　　　　　"}</div>
+            {vehicleName&&<div style={{fontSize:12,color:"#6b7280",marginTop:2}}>対象車両：{vehicleName}</div>}
           </div>
-          {staffName&&<div style={{textAlign:"right"}}><div style={{fontSize:12,color:"#9ca3af",marginBottom:2}}>担当</div><div style={{fontSize:14,color:"#374151"}}>{staffName}</div></div>}
+          {staffName&&<div style={{textAlign:"right"}}><div style={{fontSize:11,color:"#9ca3af",marginBottom:1}}>担当</div><div style={{fontSize:13,color:"#374151"}}>{staffName}</div></div>}
         </div>
-        <div style={{padding:"28px 36px",background:"#f8fafc",borderBottom:"1px solid #e5e7eb"}}>
-          <div style={{fontSize:12,color:"#6b7280",fontWeight:600,marginBottom:8}}>月額リース料（消費税別）</div>
-          <div style={{display:"flex",alignItems:"baseline",gap:12}}>
-            <div style={{fontSize:52,fontWeight:800,color:"#1e293b",lineHeight:1}}>{formatYen(r.leaseMonthly)}</div>
-            <div style={{fontSize:18,color:"#64748b"}}>/ 月</div>
+
+        <div style={{padding:"20px 32px",background:"#f8fafc",borderBottom:"1px solid #e5e7eb",display:"flex",alignItems:"center",gap:32}}>
+          <div>
+            <div style={{fontSize:11,color:"#6b7280",fontWeight:600,marginBottom:4}}>月額リース料（消費税別）</div>
+            <div style={{display:"flex",alignItems:"baseline",gap:8}}>
+              <div style={{fontSize:46,fontWeight:800,color:"#1e293b",lineHeight:1}}>{formatYen(r.leaseMonthly)}</div>
+              <div style={{fontSize:16,color:"#64748b"}}>/ 月</div>
+            </div>
           </div>
-          <div style={{marginTop:16,display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:10}}>
-            {[{l:"減価償却費",v:formatYen(r.depreciationMonthly)},{l:"車検積立",v:formatYen(r.inspectionMonthly)},{l:"修理積立",v:formatYen(r.repairMonthly)},{l:"登録費按分",v:formatYen(r.registrationMonthly)}].map(({l,v})=>(
-              <div key={l} style={{background:"white",border:"1px solid #e5e7eb",borderRadius:8,padding:"10px 14px"}}>
-                <div style={{fontSize:10,color:"#9ca3af",fontWeight:600,marginBottom:3}}>{l}</div>
-                <div style={{fontSize:14,color:"#374151",fontWeight:600}}>{v}</div>
-              </div>
-            ))}
-          </div>
-          {r.shortTermPremium>0&&<div style={{marginTop:10,padding:"8px 14px",background:"#fef9c3",border:"1px solid #fde047",borderRadius:6,fontSize:13,color:"#854d0e",display:"flex",justifyContent:"space-between"}}><span>短期契約割増（{params.years}年）</span><span>▲ {formatYen(r.shortTermPremium)} / 月</span></div>}
-          {r.mileageDiscount>0&&<div style={{marginTop:8,padding:"8px 14px",background:"#f0fdf4",border:"1px solid #86efac",borderRadius:6,fontSize:13,color:"#166534",display:"flex",justifyContent:"space-between"}}><span>走行距離割引（{mileage.label}）</span><span>▼ {formatYen(r.mileageDiscount)} / 月</span></div>}
-        </div>
-        <div style={{padding:"24px 36px",borderBottom:"1px solid #e5e7eb"}}>
-          <div style={{fontSize:13,fontWeight:700,color:"#374151",marginBottom:14,paddingBottom:8,borderBottom:"2px solid #1e293b"}}>リース条件</div>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:0}}>
-            {[{label:"車両価格（本体）",value:formatYen(params.carPrice)},{label:"リース期間",value:`${params.years}年（${r.months}ヶ月）`},{label:"年間走行距離上限",value:mileage.label},{label:"残価率（査定補正前）",value:`${(r.residualRate*100).toFixed(0)}%（${formatYen(r.residualValue)}）`},{label:"頭金",value:params.downPayment>0?formatYen(params.downPayment):"なし"},{label:"初期登録費用",value:formatYen(params.registration)}].map(({label,value},i)=>(
-              <div key={label} style={{padding:"10px 0",borderBottom:"1px solid #f3f4f6",display:"flex",justifyContent:"space-between",paddingRight:i%2===0?24:0,paddingLeft:i%2===1?24:0,borderLeft:i%2===1?"1px solid #f3f4f6":"none"}}>
-                <span style={{fontSize:13,color:"#6b7280"}}>{label}</span>
-                <span style={{fontSize:13,color:"#111827",fontWeight:600}}>{value}</span>
-              </div>
-            ))}
+          <div style={{flex:1,borderLeft:"1px solid #e2e8f0",paddingLeft:24}}>
+            {r.shortTermPremium>0&&<div style={{fontSize:12,color:"#854d0e",marginBottom:4}}>※ 短期契約割増（{params.years}年）▲ {formatYen(r.shortTermPremium)}/月 含む</div>}
+            {r.mileageDiscount>0&&<div style={{fontSize:12,color:"#166534",marginBottom:4}}>※ 走行距離割引（{mileage.label}）▼ {formatYen(r.mileageDiscount)}/月 適用</div>}
+            {r.downPayment>0&&<div style={{fontSize:12,color:"#1d4ed8"}}>※ 頭金 {formatYen(r.downPayment)} 適用済</div>}
+            {!r.shortTermPremium&&!r.mileageDiscount&&!r.downPayment&&<div style={{fontSize:12,color:"#9ca3af"}}>標準条件での試算</div>}
           </div>
         </div>
-        <div style={{padding:"24px 36px",borderBottom:"1px solid #e5e7eb",background:"#fafafa"}}>
-          <div style={{fontSize:13,fontWeight:700,color:"#374151",marginBottom:14,paddingBottom:8,borderBottom:"2px solid #1e293b"}}>お客様ご負担費用（月額リース料に含まれません）</div>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
-            {[{label:"自動車保険（任意）",value:"お客様手配",note:"車両保険込みを推奨"},{label:"タイヤ・消耗品",value:"実費",note:"摩耗・パンク等"},{label:"ガソリン・充電費",value:"実費",note:"使用量に応じて"},{label:"洗車・クリーニング",value:"実費",note:"任意"},{label:"駐車場代",value:"実費",note:"契約者負担"},{label:"違反罰金・事故費用",value:"実費",note:"契約者負担"}].map(({label,value,note})=>(
-              <div key={label} style={{background:"white",border:"1px solid #e5e7eb",borderRadius:8,padding:"12px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                <div><div style={{fontSize:13,color:"#374151",fontWeight:500}}>{label}</div><div style={{fontSize:11,color:"#9ca3af",marginTop:2}}>{note}</div></div>
-                <div style={{fontSize:13,color:"#6b7280",fontWeight:600}}>{value}</div>
+
+        <div style={{padding:"16px 32px",borderBottom:"1px solid #e5e7eb"}}>
+          <div style={{fontSize:12,fontWeight:700,color:"#374151",marginBottom:10,paddingBottom:6,borderBottom:"2px solid #1e293b"}}>リース条件</div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6}}>
+            {[
+              {label:"車両価格（本体）",value:formatYen(params.carPrice)},
+              {label:"リース期間",value:`${params.years}年（${r.months}ヶ月）`},
+              {label:"年間走行距離上限",value:mileage.label},
+              {label:"残価率",value:`${(r.residualRate*100).toFixed(0)}%（${formatYen(r.residualValue)}）`},
+              {label:"頭金",value:params.downPayment>0?formatYen(params.downPayment):"なし"},
+              {label:"初期登録費用",value:formatYen(params.registration)},
+            ].map(({label,value})=>(
+              <div key={label} style={{padding:"7px 10px",background:"#f8fafc",borderRadius:6,border:"1px solid #e5e7eb"}}>
+                <div style={{fontSize:10,color:"#9ca3af",marginBottom:2}}>{label}</div>
+                <div style={{fontSize:12,color:"#111827",fontWeight:600}}>{value}</div>
               </div>
             ))}
           </div>
         </div>
-        <div style={{padding:"24px 36px",borderBottom:"1px solid #e5e7eb"}}>
-          <div style={{fontSize:13,fontWeight:700,color:"#374151",marginBottom:14,paddingBottom:8,borderBottom:"2px solid #1e293b"}}>月額リース料に含まれるもの（貸主負担）</div>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:10}}>
-            {[{label:"車検費用",icon:"✅"},{label:"法定点検",icon:"✅"},{label:"修理費積立",icon:"✅"}].map(({label,icon})=>(
-              <div key={label} style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:8,padding:"10px 14px",display:"flex",alignItems:"center",gap:8}}>
-                <span>{icon}</span><span style={{fontSize:13,color:"#166534",fontWeight:500}}>{label}</span>
-              </div>
-            ))}
+
+        <div style={{padding:"16px 32px",borderBottom:"1px solid #e5e7eb",display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
+          <div>
+            <div style={{fontSize:12,fontWeight:700,color:"#374151",marginBottom:8,paddingBottom:5,borderBottom:"2px solid #1e293b"}}>お客様ご負担費用</div>
+            <div style={{fontSize:11,color:"#6b7280",lineHeight:1.9}}>
+              ・ 自動車保険（任意・車両保険込み推奨）<br/>
+              ・ タイヤ・オイル等の消耗品<br/>
+              ・ ガソリン・充電費用<br/>
+              ・ 駐車場代・洗車費用<br/>
+              ・ 違反罰金・事故費用
+            </div>
           </div>
-          <div style={{marginTop:10,fontSize:12,color:"#9ca3af"}}>※ 車検スケジュール：3年目¥120,000 / 5年目¥80,000 / 7年目¥120,000 / 9年目¥80,000（{params.years}年間合計：{formatYen(r.totalInspection)}）</div>
+          <div>
+            <div style={{fontSize:12,fontWeight:700,color:"#374151",marginBottom:8,paddingBottom:5,borderBottom:"2px solid #1e293b"}}>月額に含まれるもの（貸主負担）</div>
+            <div style={{display:"flex",flexDirection:"column",gap:5}}>
+              {[{l:"✅ 車検費用",n:`3・5・7・9年目（計${formatYen(r.totalInspection)}）`},{l:"✅ 法定点検・修理費積立",n:"年間積立 "+formatYen(params.annualRepair)}].map(({l,n})=>(
+                <div key={l} style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:6,padding:"6px 10px"}}>
+                  <div style={{fontSize:12,color:"#166534",fontWeight:500}}>{l}</div>
+                  <div style={{fontSize:10,color:"#4ade80"}}>{n}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-        {notes&&<div style={{padding:"20px 36px",borderBottom:"1px solid #e5e7eb"}}><div style={{fontSize:12,fontWeight:700,color:"#374151",marginBottom:6}}>備考</div><div style={{fontSize:13,color:"#4b5563",lineHeight:1.8}}>{notes}</div></div>}
-        <div style={{padding:"20px 36px",background:"#f8fafc"}}>
-          <div style={{fontSize:11,color:"#9ca3af",lineHeight:1.8}}>
-            ※ 本見積書の金額は参考値です。残価率は中古車市場の一般的な参考値に基づき試算しています。<br/>
-            ※ 消費税は別途申し受けます。金利・損害保険料は含まれておりません。<br/>
-            ※ 正式なご契約の際は別途契約書をご確認ください。
+
+        {notes&&<div style={{padding:"12px 32px",borderBottom:"1px solid #e5e7eb"}}><span style={{fontSize:11,fontWeight:700,color:"#374151"}}>備考：</span><span style={{fontSize:12,color:"#4b5563",marginLeft:8}}>{notes}</span></div>}
+
+        <div style={{padding:"14px 32px",background:"#f8fafc"}}>
+          <div style={{fontSize:10,color:"#9ca3af",lineHeight:1.8}}>
+            ※ 本見積書の金額は参考値です。残価率は中古車市場の一般的な参考値に基づき試算しています。消費税は別途申し受けます。金利・損害保険料は含まれておりません。正式なご契約の際は別途契約書をご確認ください。
           </div>
-          <div style={{marginTop:12,paddingTop:12,borderTop:"1px solid #e5e7eb",display:"flex",justifyContent:"space-between"}}>
-            <div style={{fontSize:11,color:"#9ca3af"}}>Advisory Japan Vehicle Leasing</div>
-            <div style={{fontSize:11,color:"#9ca3af"}}>発行：{today}</div>
+          <div style={{marginTop:8,paddingTop:8,borderTop:"1px solid #e5e7eb",display:"flex",justifyContent:"space-between"}}>
+            <div style={{fontSize:10,color:"#9ca3af"}}>Advisory Japan Vehicle Leasing</div>
+            <div style={{fontSize:10,color:"#9ca3af"}}>発行：{today}</div>
           </div>
         </div>
       </div>
@@ -209,7 +232,6 @@ export default function LeaseCalculator() {
         .pdf-btn:hover { background: rgba(59,130,246,0.25) !important; transform: translateY(-1px); }
         @media print { .no-print { display: none !important; } * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; } }
       `}</style>
-
       <div style={{ background: "linear-gradient(180deg, #0a1628 0%, #060d1a 100%)", borderBottom: "1px solid #1a2d4a", padding: "36px 24px 28px", marginBottom: 32 }}>
         <div style={{ maxWidth: 720, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           <div>
@@ -229,7 +251,6 @@ export default function LeaseCalculator() {
           </div>
         </div>
       </div>
-
       <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 20px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
           <div style={{ background: "#0b1929", border: "1px solid #1a2d4a", borderRadius: 16, padding: "28px 24px" }}>
@@ -271,7 +292,6 @@ export default function LeaseCalculator() {
               </div>
             </div>
           </div>
-
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             <div style={{ background: "linear-gradient(135deg, #0d2040 0%, #0a1628 100%)", border: "1px solid #2a4a70", borderRadius: 16, padding: "28px 24px", textAlign: "center" }}>
               <div style={{ fontSize: 10, letterSpacing: "0.15em", color: "#3b82f6", textTransform: "uppercase", fontFamily: "'DM Mono', monospace", marginBottom: 12 }}>月額リース料（借主）</div>
@@ -287,15 +307,15 @@ export default function LeaseCalculator() {
               </div>
               {r.shortTermPremium>0&&<div style={{ marginTop: 10, padding: "10px 14px", borderRadius: 8, background: "rgba(251,191,36,0.07)", border: "1px solid rgba(251,191,36,0.2)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <span style={{ fontSize: 11, color: "#fbbf24", fontFamily: "'DM Mono', monospace" }}>短期割増（{years}年契約）</span>
-                <span style={{ fontSize: 13, fontWeight: 600, color: "#fbbf24", fontFamily: "'DM Mono', monospace" }}>▲ {formatYen(r.shortTermPremium)}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: "#fbbf24" }}>▲ {formatYen(r.shortTermPremium)}</span>
               </div>}
               {r.downPayment>0&&<div style={{ marginTop: 10, padding: "10px 14px", borderRadius: 8, background: "rgba(59,130,246,0.07)", border: "1px solid rgba(59,130,246,0.2)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <span style={{ fontSize: 11, color: "#93c5fd", fontFamily: "'DM Mono', monospace" }}>頭金按分（{formatYen(r.downPayment)}）</span>
-                <span style={{ fontSize: 13, fontWeight: 600, color: "#93c5fd", fontFamily: "'DM Mono', monospace" }}>▼ {formatYen(r.downPaymentMonthly)}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: "#93c5fd" }}>▼ {formatYen(r.downPaymentMonthly)}</span>
               </div>}
               {r.mileageDiscount!==0&&<div style={{ marginTop: 10, padding: "10px 14px", borderRadius: 8, background: r.mileageDiscount>0?"rgba(52,211,153,0.07)":"rgba(248,113,113,0.07)", border: `1px solid ${r.mileageDiscount>0?"rgba(52,211,153,0.2)":"rgba(248,113,113,0.2)"}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <span style={{ fontSize: 11, color: r.mileageDiscount>0?"#34d399":"#f87171", fontFamily: "'DM Mono', monospace" }}>走行距離割引（{r.mileage.label}）</span>
-                <span style={{ fontSize: 13, fontWeight: 600, color: r.mileageDiscount>0?"#34d399":"#f87171", fontFamily: "'DM Mono', monospace" }}>{r.mileageDiscount>0?`▼ ${formatYen(r.mileageDiscount)}`:`▲ ${formatYen(Math.abs(r.mileageDiscount))}`}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: r.mileageDiscount>0?"#34d399":"#f87171" }}>{r.mileageDiscount>0?`▼ ${formatYen(r.mileageDiscount)}`:`▲ ${formatYen(Math.abs(r.mileageDiscount))}`}</span>
               </div>}
             </div>
             <div style={{ background: "#0b1929", border: "1px solid #1a2d4a", borderRadius: 16, padding: "20px 20px" }}>
