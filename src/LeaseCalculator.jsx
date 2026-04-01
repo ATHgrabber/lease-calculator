@@ -117,9 +117,10 @@ export default function LeaseCalculator() {
 
       <div style={{ background: "linear-gradient(180deg, #0a1628 0%, #060d1a 100%)", borderBottom: "1px solid #1a2d4a", padding: "36px 24px 28px", marginBottom: 32 }}>
         <div style={{ maxWidth: 720, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-          <div style={{ fontSize: 10, letterSpacing: "0.2em", color: "#3b82f6", textTransform: "uppercase", fontFamily: "'DM Mono', monospace", marginBottom: 10 }}>Advisory Japan — Vehicle Leasing</div>
-          <h1 style={{ fontSize: 28, fontWeight: 800, color: "#e8f1fb", fontFamily: "'Syne', sans-serif", margin: 0, letterSpacing: "-0.02em" }}>リース料金 計算ツール</h1>
-          <p style={{ fontSize: 13, color: "#4a6080", marginTop: 8, lineHeight: 1.6 }}>車検・修理：貸主負担　／　消耗品・保険：借主負担　／　売却益で利益回収</p>
+          <div>
+            <div style={{ fontSize: 10, letterSpacing: "0.2em", color: "#3b82f6", textTransform: "uppercase", fontFamily: "'DM Mono', monospace", marginBottom: 10 }}>Advisory Japan — Vehicle Leasing</div>
+            <h1 style={{ fontSize: 28, fontWeight: 800, color: "#e8f1fb", fontFamily: "'Syne', sans-serif", margin: 0, letterSpacing: "-0.02em" }}>リース料金 計算ツール</h1>
+            <p style={{ fontSize: 13, color: "#4a6080", marginTop: 8, lineHeight: 1.6 }}>車検・修理：貸主負担　／　消耗品・保険：借主負担　／　売却益で利益回収</p>
           </div>
           <button
             className="pdf-btn no-print"
