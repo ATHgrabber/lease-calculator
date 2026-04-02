@@ -211,7 +211,20 @@ function App(){
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
           <div style={{background:"#0b1929",border:"1px solid #1a2d4a",borderRadius:16,padding:"28px 24px"}}>
             <div style={{fontSize:10,letterSpacing:"0.15em",color:"#3b82f6",textTransform:"uppercase",fontFamily:"'DM Mono',monospace",marginBottom:24}}>パラメーター設定</div>
-            <SR label="車両価格" value={cp} setValue={setCp} min={500000} max={30000000} step={50000} fmt={v=>`¥${(v/10000).toFixed(0)}万`} sub="新車購入価格（登録費除く）"/>
+            <div style={{marginBottom:28}}>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:6}}>
+        <span style={{fontSize:13,color:"#8a9bb0",letterSpacing:"0.06em",textTransform:"uppercase",fontFamily:"'DM Mono',monospace"}}>車両価格</span>
+        <div style={{display:"flex",alignItems:"center",gap:8}}>
+          <input type="number" value={cp} min={500000} max={30000000} step={10000}
+            onChange={e=>{const v=Math.min(30000000,Math.max(500000,Number(e.target.value)||500000));setCp(v);}}
+            style={{width:120,fontSize:16,fontWeight:700,color:"#e2eaf5",background:"#0d1f35",border:"1px solid #2a4a70",borderRadius:6,padding:"4px 8px",textAlign:"right",fontFamily:"'DM Mono',monospace",outline:"none"}}/>
+          <span style={{fontSize:16,color:"#8a9bb0",fontFamily:"'DM Mono',monospace"}}>円</span>
+        </div>
+      </div>
+      <div style={{fontSize:11,color:"#5a6a7a",marginBottom:8}}>新車購入価格（登録費除く）</div>
+      <input type="range" min={500000} max={30000000} step={50000} value={cp} onChange={e=>setCp(Number(e.target.value))}
+        style={{width:"100%",height:4,borderRadius:2,outline:"none",cursor:"pointer",background:`linear-gradient(to right,#3b82f6 0%,#3b82f6 ${((cp-500000)/(30000000-500000))*100}%,#1e3050 ${((cp-500000)/(30000000-500000))*100}%,#1e3050 100%)`}}/>
+    </div>
             <SR label="リース期間" value={y} setValue={setY} min={1} max={10} step={1} fmt={v=>`${v}年`} sub={`基準残価率：${(RR[y]*100).toFixed(0)}%（距離補正前）`}/>
             <SR label="月次マージン" value={mr} setValue={setMr} min={0} max={20} step={0.5} fmt={v=>`${v}%`} sub="原価に上乗せする利益率（最小化推奨）"/>
             <SR label="年間修理予算" value={ar} setValue={setAr} min={0} max={300000} step={10000} fmt={v=>`¥${(v/10000).toFixed(0)}万`} sub="貸主負担の修理積立（車検除く）"/>
